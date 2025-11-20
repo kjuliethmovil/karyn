@@ -1,0 +1,91 @@
+import dotenv from "dotenv";
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYwNTY2Njk5LCJleHAiOjE3NjA1NjcyOTl9.lsTb2mzmVMq8VRbyDOzK4EeIpA13AB-mzDzgoEuNT5s
+@baseUrl = http://localhost:4000
+
+### ================== RUTAS SIN AUTENTICACIÓN ==================
+
+### Obtener todos los pagos (SIN token)
+GET {{baseUrl}}/api/payments/public
+
+### Obtener un pago por ID (SIN token)
+GET {{baseUrl}}/api/payments/public/10
+
+### Crear un pago (SIN token)
+POST {{baseUrl}}/api/payments/public
+Content-Type: application/json
+
+{
+  "contract_id": 3,
+  "payment_date": "2025-11-20T14:00:00.000Z",
+  "amount": 300000,
+  "method": "CASH",
+  "status": "PENDING",
+  "reference": "REF-ABC123"
+}
+
+### Actualizar un pago (SIN token)
+PATCH {{baseUrl}}/api/payments/public/10
+Content-Type: application/json
+
+{
+  "contract_id": 3,
+  "payment_date": "2025-11-21T12:00:00.000Z",
+  "amount": 300000,
+  "method": "TRANSFER",
+  "status": "PAID",
+  "reference": "TRANS-987654"
+}
+
+### Eliminar un pago (FÍSICO, SIN token)
+DELETE {{baseUrl}}/api/payments/public/10
+
+### Eliminar un pago lógicamente (SIN token)
+DELETE {{baseUrl}}/api/payments/public/10/logic
+
+
+### ================== RUTAS CON AUTENTICACIÓN ==================
+
+### Obtener todos los pagos (CON token)
+GET {{baseUrl}}/api/payments
+Authorization: Bearer {{token}}
+
+### Obtener un pago por ID (CON token)
+GET {{baseUrl}}/api/payments/5
+Authorization: Bearer {{token}}
+
+### Crear un pago (CON token)
+POST {{baseUrl}}/api/payments
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "contract_id": 4,
+  "payment_date": "2025-11-25T10:30:00.000Z",
+  "amount": 450000,
+  "method": "CARD",
+  "status": "PENDING",
+  "reference": "CARD-556677"
+}
+
+### Actualizar un pago (CON token)
+PATCH {{baseUrl}}/api/payments/5
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "contract_id": 4,
+  "payment_date": "2025-11-26T10:30:00.000Z",
+  "amount": 450000,
+  "method": "TRANSFER",
+  "status": "PAID",
+  "reference": "BANK-112233"
+}
+
+### Eliminar un pago (FÍSICO, CON token)
+DELETE {{baseUrl}}/api/payments/5
+Authorization: Bearer {{token}}
+
+### Eliminar un pago lógicamente (CON token)
+DELETE {{baseUrl}}/api/payments/5/logic
+Authorization: Bearer {{token}}

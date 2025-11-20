@@ -1,0 +1,52 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-50 p-6">
+  <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
+    <h2 class="text-2xl font-bold mb-6 text-gray-700">Registrar Cliente</h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+      <!-- Nombre -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Nombre</label>
+        <input pInputText formControlName="name" type="text" placeholder="Ingrese el nombre" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+
+      <!-- Dirección -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Dirección</label>
+        <input pInputText formControlName="address" type="text" placeholder="Ingrese la dirección" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+
+      <!-- Teléfono -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Teléfono</label>
+        <input pInputText formControlName="phone" type="text" placeholder="Ingrese el teléfono" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Email</label>
+        <input pInputText formControlName="email" type="email" placeholder="ejemplo@correo.com" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+
+      <!-- Contraseña -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Contraseña</label>
+        <input pInputText formControlName="password" type="password" placeholder="Ingrese la contraseña" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+
+      <!-- Estado -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Estado</label>
+        <select formControlName="status" class="w-full mt-1 p-2 border rounded-md">
+          <option value="ACTIVE">Activo</option>
+          <option value="INACTIVE">Inactivo</option>
+        </select>
+      </div>
+
+      <!-- Botones -->
+      <div class="flex justify-end mt-6 gap-3">
+        <button pButton type="button" class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-md" (click)="cancelar()" label="Cancelar"></button>
+        <button pButton type="submit" [disabled]="form.invalid" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md" label="Guardar" icon="pi pi-check"></button>
+      </div>
+    </form>
+  </div>
+</div>

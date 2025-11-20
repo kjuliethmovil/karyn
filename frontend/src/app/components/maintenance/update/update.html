@@ -1,0 +1,39 @@
+<!-- 
+  Archivo: update.html
+  Autor: Karyn Movil Estacio
+  Fecha: 2025-10-02
+  Descripción: Formulario para actualizar un mantenimiento (Maintenance) con Reactive Forms y TailwindCSS.
+-->
+
+<div class="flex items-center justify-center min-h-screen bg-gray-50 p-6">
+  <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
+    <h2 class="text-2xl font-bold mb-6 text-gray-700">Editar Mantenimiento</h2>
+
+    <form [formGroup]="maintenanceForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-600">ID Equipo</label>
+        <input pInputText formControlName="equipment_id" type="number" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Fecha</label>
+        <input pInputText formControlName="date" type="date" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Descripción</label>
+        <input pInputText formControlName="description" type="text" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Costo</label>
+        <input pInputText formControlName="cost" type="number" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Estado</label>
+        <input pInputText formControlName="status" type="text" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+
+      <div class="flex justify-end mt-6">
+        <button pButton type="submit" [disabled]="maintenanceForm.invalid" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md" label="Actualizar" icon="pi pi-save"></button>
+      </div>
+    </form>
+  </div>
+</div>

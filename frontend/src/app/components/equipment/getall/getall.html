@@ -1,0 +1,97 @@
+<!-- 
+  Archivo: getall.html
+  Autor: Karyn Movil Estacio
+  Fecha: 2025-10-02
+  Descripción: Vista para listar equipos en una tabla responsiva con PrimeNG y TailwindCSS,
+  con opciones para crear, editar y eliminar equipos. Ajustada para que no se desborde.
+-->
+
+<div class="p-6 bg-custom-gradient w-full h-full">
+  <p-confirmDialog appendTo="body"></p-confirmDialog>
+  <p-toast></p-toast>
+
+  <!-- Encabezado y botón agregar -->
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-3xl font-bold text-white tracking-wide flex items-center gap-3 text-shadow-custom">
+      <i class="pi pi-box text-white text-3xl text-shadow-custom"></i>
+      Gestión de Equipos
+    </h2>
+
+    <div class="flex items-center gap-3">
+      <button
+        pButton
+        type="button"
+        class="p-button-sm p-button-rounded p-button-success shadow-md"
+        label="Agregar Equipo"
+        icon="pi pi-plus"
+        [routerLink]="['/equipos/nuevo']"
+      ></button>
+    </div>
+  </div>
+
+  <!-- Tabla -->
+  <div class="card shadow-md rounded-lg bg-gray-50 p-5 overflow-x-auto">
+    <p-table
+      #dt
+      [value]="equipments"
+      stripedRows
+      paginator
+      [rows]="5"
+      [rowsPerPageOptions]="[5,10,20]"
+      [globalFilterFields]="[
+        'equipment_id','category_id','provider_id','name','description','status','daily_rate'
+      ]"
+      class="p-datatable-sm p-datatable-gridlines p-datatable-striped rounded-md overflow-hidden bg-white"
+      [tableStyle]="{ 'min-width': '75rem' }"
+    >
+      <!-- Encabezado -->
+      <ng-template pTemplate="header">
+        <tr class="bg-gray-100 text-gray-700 uppercase text-sm tracking-wide">
+          <th pSortableColumn="equipment_id" class="px-4 py-2 text-left">ID <p-sortIcon field="equipment_id"></p-sortIcon></th>
+          <th pSortableColumn="category_id" class="px-4 py-2 text-left">Categoría <p-sortIcon field="category_id"></p-sortIcon></th>
+          <th pSortableColumn="provider_id" class="px-4 py-2 text-left">Proveedor <p-sortIcon field="provider_id"></p-sortIcon></th>
+          <th pSortableColumn="name" class="px-4 py-2 text-left">Nombre <p-sortIcon field="name"></p-sortIcon></th>
+          <th pSortableColumn="description" class="px-4 py-2 text-left">Descripción <p-sortIcon field="description"></p-sortIcon></th>
+          <th pSortableColumn="status" class="px-4 py-2 text-left">Estado <p-sortIcon field="status"></p-sortIcon></th>
+          <th pSortableColumn="daily_rate" class="px-4 py-2 text-left">Tarifa Diaria <p-sortIcon field="daily_rate"></p-sortIcon></th>
+          <th class="px-4 py-2 text-center">Acciones</th>
+        </tr>
+      </ng-template>
+
+      <!-- Cuerpo -->
+      <ng-template pTemplate="body" let-equipment>
+        <tr class="hover:bg-gray-50 transition">
+          <td class="px-4 py-2 font-medium text-gray-800">{{ equipment.id }}</td>
+          <td class="px-4 py-2">{{ equipment.category_id }}</td>
+          <td class="px-4 py-2">{{ equipment.provider_id }}</td>
+          <td class="px-4 py-2">{{ equipment.name }}</td>
+          <td class="px-4 py-2 truncate">{{ equipment.brand }}</td>
+          <td class="px-4 py-2">{{ equipment.status }}</td>
+          <td class="px-4 py-2">{{ equipment.price | currency }}</td>
+
+          <!-- Acciones: editar y eliminar -->
+          <td class="px-4 py-2 text-center">
+            <div class="flex justify-center gap-2">
+              <a
+                [routerLink]="['/equipos/editar', equipment.equipment_id]"
+                class="text-blue-600 hover:text-blue-800"
+                pTooltip="Editar"
+              >
+                <i class="pi pi-pencil"></i>
+              </a>
+
+              <button
+                pButton
+                type="button"
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-text p-button-danger"
+                (click)="deleteEquipment(equipment)"
+                pTooltip="Eliminar"
+              ></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

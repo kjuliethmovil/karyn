@@ -1,0 +1,91 @@
+import dotenv from "dotenv";
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYwNTY2Njk5LCJleHAiOjE3NjA1NjcyOTl9.lsTb2mzmVMq8VRbyDOzK4EeIpA13AB-mzDzgoEuNT5s
+@baseUrl = http://localhost:4000
+
+### ================== RUTAS SIN AUTENTICACIÓN ==================
+
+### Obtener todos los proveedores (SIN token)
+GET {{baseUrl}}/api/providers/public
+
+### Obtener un proveedor por ID (SIN token)
+GET {{baseUrl}}/api/providers/public/7
+
+### Crear un proveedor (SIN token)
+POST {{baseUrl}}/api/providers/public
+Content-Type: application/json
+
+{
+  "name": "Proveedora del Caribe",
+  "address": "Calle 12 #45-67",
+  "phone": "3001234567",
+  "email": "contacto@caribe.com",
+  "contact_person": "Juan Pérez",
+  "status": "ACTIVE"
+}
+
+### Actualizar un proveedor (SIN token)
+PATCH {{baseUrl}}/api/providers/public/7
+Content-Type: application/json
+
+{
+  "name": "Proveedor EquipRent",
+  "address": "Av 10 #20-30",
+  "phone": "3109876543",
+  "email": "equiprent@empresa.com",
+  "contact_person": "María Gómez",
+  "status": "ACTIVE"
+}
+
+### Eliminar proveedor físicamente (SIN token)
+DELETE {{baseUrl}}/api/providers/public/7
+
+### Eliminar proveedor lógicamente (SIN token)
+DELETE {{baseUrl}}/api/providers/public/7/logic
+
+
+### ================== RUTAS CON AUTENTICACIÓN ==================
+
+### Obtener todos los proveedores (CON token)
+GET {{baseUrl}}/api/providers
+Authorization: Bearer {{token}}
+
+### Obtener un proveedor por ID (CON token)
+GET {{baseUrl}}/api/providers/4
+Authorization: Bearer {{token}}
+
+### Crear un proveedor (CON token)
+POST {{baseUrl}}/api/providers
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Andina Tools",
+  "address": "Cra 50 #10-20",
+  "phone": "3005558899",
+  "email": "ventas@andinatools.com",
+  "contact_person": "Carlos Ruiz",
+  "status": "ACTIVE"
+}
+
+### Actualizar un proveedor (CON token)
+PATCH {{baseUrl}}/api/providers/4
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Andina Tools S.A.",
+  "address": "Cra 52 #10-22",
+  "phone": "3014448899",
+  "email": "contacto@andinatools.com",
+  "contact_person": "Diana Torres",
+  "status": "ACTIVE"
+}
+
+### Eliminar proveedor físicamente (CON token)
+DELETE {{baseUrl}}/api/providers/4
+Authorization: Bearer {{token}}
+
+### Eliminar proveedor lógicamente (CON token)
+DELETE {{baseUrl}}/api/providers/4/logic
+Authorization: Bearer {{token}}

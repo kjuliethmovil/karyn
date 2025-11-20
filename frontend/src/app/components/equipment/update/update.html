@@ -1,0 +1,52 @@
+<!-- 
+  Archivo: update.html
+  Autor: Karyn Movil Estacio
+  Fecha: 2025-10-02
+  Descripción: Formulario para actualizar un equipo con Reactive Forms y TailwindCSS.
+-->
+
+<div class="flex items-center justify-center min-h-screen bg-gray-50 p-6">
+  <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
+    <h2 class="text-2xl font-bold mb-6 text-gray-700">Editar Equipo</h2>
+
+    <form [formGroup]="equipmentForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <!-- Campos iguales que en Create -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Categoría</label>
+        <select formControlName="category_id" class="w-full mt-1 p-2 border rounded-md">
+          <option value="" disabled selected>Seleccione categoría</option>
+          <option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Proveedor</label>
+        <select formControlName="provider_id" class="w-full mt-1 p-2 border rounded-md">
+          <option value="" disabled selected>Seleccione proveedor</option>
+          <option *ngFor="let p of providers" [value]="p.id">{{ p.name }}</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Nombre</label>
+        <input pInputText formControlName="name" type="text" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Descripción</label>
+        <input pInputText formControlName="description" type="text" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Estado</label>
+        <select formControlName="status" class="w-full mt-1 p-2 border rounded-md">
+          <option *ngFor="let option of statusOptions" [value]="option">{{ option }}</option>
+        </select>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Tarifa Diaria</label>
+        <input pInputText formControlName="daily_rate" type="number" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+
+      <div class="flex justify-end mt-6">
+        <button pButton type="submit" [disabled]="equipmentForm.invalid" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md" label="Actualizar" icon="pi pi-save"></button>
+      </div>
+    </form>
+  </div>
+</div>

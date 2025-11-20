@@ -1,0 +1,87 @@
+<!-- 
+  Archivo: create.html
+  Autor: Karyn Movil Estacio
+  Fecha: 2025-10-02
+  Descripción: Formulario para crear un mantenimiento (Maintenance) con Reactive Forms y TailwindCSS.
+-->
+
+<div class="flex items-center justify-center min-h-screen bg-gray-50 p-6">
+  <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
+    <h2 class="text-2xl font-bold mb-6 text-gray-700">Registrar Mantenimiento</h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+      <!-- Equipo -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">ID Equipo</label>
+        <input
+          pInputText
+          formControlName="equipment_id"
+          type="number"
+          class="w-full mt-1 p-2 border rounded-md"
+        />
+      </div>
+
+      <!-- Fecha -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Fecha</label>
+        <input
+          pInputText
+          formControlName="date"
+          type="date"
+          class="w-full mt-1 p-2 border rounded-md"
+        />
+      </div>
+
+      <!-- Descripción -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Descripción</label>
+        <input
+          pInputText
+          formControlName="description"
+          type="text"
+          placeholder="Detalle del mantenimiento"
+          class="w-full mt-1 p-2 border rounded-md"
+        />
+      </div>
+
+      <!-- Costo -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Costo</label>
+        <input
+          pInputText
+          formControlName="cost"
+          type="number"
+          class="w-full mt-1 p-2 border rounded-md"
+        />
+      </div>
+
+      <!-- Estado -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Estado</label>
+        <select formControlName="status" class="w-full mt-1 p-2 border rounded-md">
+          <option value="ACTIVE">Activo</option>
+          <option value="INACTIVE">Inactivo</option>
+        </select>
+      </div>
+
+      <!-- Botones -->
+      <div class="flex justify-end mt-6 gap-3">
+        <button
+          pButton
+          type="button"
+          class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-md"
+          (click)="cancelar()"
+          label="Cancelar"
+        ></button>
+        <button
+          pButton
+          type="submit"
+          [disabled]="form.invalid"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+          label="Guardar"
+          icon="pi pi-check"
+        ></button>
+      </div>
+    </form>
+  </div>
+</div>

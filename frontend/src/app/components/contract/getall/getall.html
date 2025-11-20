@@ -1,0 +1,64 @@
+<!-- 
+  Archivo: getall.html
+  Autor: Karyn Movil Estacio
+  Fecha: 2025-10-02
+  Descripción: Vista para listar contratos en una tabla responsiva con PrimeNG y TailwindCSS,
+  con opciones para crear y editar contratos. Ajustada para que no se desborde.
+-->
+
+<div class="p-6">
+  <!-- Botón para crear nuevo contrato -->
+  <div class="flex justify-end mb-4">
+    <button
+      pButton
+      type="button"
+      class="p-button p-component bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+      icon="pi pi-plus"
+      label="Nuevo Contrato"
+      [routerLink]="['/contratos/nuevo']"
+    >
+    </button>
+  </div>
+
+  <!-- Tabla -->
+  <div class="overflow-x-auto rounded-lg shadow-md max-w-full">
+    <p-table
+      [value]="contracts"
+      stripedRows
+      responsiveLayout="scroll"
+      class="w-full table-fixed"
+    >
+      <ng-template pTemplate="header">
+        <tr class="bg-gray-100 text-gray-700 text-sm uppercase tracking-wide">
+          <th class="p-3 text-left w-20">Id</th>
+          <th class="p-3 text-left w-1/4">Cliente</th>
+          <th class="p-3 text-left w-1/5">Fecha Inicio</th>
+          <th class="p-3 text-left w-1/5">Fecha Fin</th>
+          <th class="p-3 text-left w-1/5">Monto Total</th>
+          <th class="p-3 text-left w-1/6">Estado</th>
+          <th class="p-3 text-center w-20">Acciones</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-contract>
+        <tr class="border-b hover:bg-gray-50">
+          <td class="p-3">{{ contract.contract_id }}</td>
+          <td class="p-3">{{ contract.client_id }}</td>
+          <td class="p-3 whitespace-nowrap">{{ contract.start_date | date }}</td>
+          <td class="p-3 whitespace-nowrap">{{ contract.end_date | date }}</td>
+          <td class="p-3 whitespace-nowrap">{{ contract.total_amount | currency }}</td>
+          <td class="p-3">{{ contract.status }}</td>
+          <td class="p-3 text-center">
+            <!-- Botón editar -->
+            <a
+              [routerLink]="['/contratos/editar', contract.contract_id]"
+              class="text-blue-600 hover:text-blue-800"
+            >
+              <i class="pi pi-pencil"></i>
+            </a>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

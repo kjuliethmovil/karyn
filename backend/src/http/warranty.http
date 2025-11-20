@@ -1,0 +1,91 @@
+import dotenv from "dotenv";
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYwNTY2Njk5LCJleHAiOjE3NjA1NjcyOTl9.lsTb2mzmVMq8VRbyDOzK4EeIpA13AB-mzDzgoEuNT5s
+@baseUrl = http://localhost:4000
+
+### ================== RUTAS SIN AUTENTICIÓN ==================
+
+### Obtener todas las garantías (SIN token)
+GET {{baseUrl}}/api/warranties/public
+
+### Obtener una garantía por ID (SIN token)
+GET {{baseUrl}}/api/warranties/public/7
+
+### Crear una garantía (SIN token)
+POST {{baseUrl}}/api/warranties/public
+Content-Type: application/json
+
+{
+  "contract_id": 1,
+  "equipment_id": 4,
+  "issue_date": "2025-11-20T10:00:00.000Z",
+  "expiration_date": "2026-11-20T10:00:00.000Z",
+  "description": "Garantía estándar de 12 meses",
+  "status": "ACTIVE"
+}
+
+### Actualizar una garantía (SIN token)
+PATCH {{baseUrl}}/api/warranties/public/7
+Content-Type: application/json
+
+{
+  "contract_id": 1,
+  "equipment_id": 4,
+  "issue_date": "2025-11-21T10:00:00.000Z",
+  "expiration_date": "2026-11-21T10:00:00.000Z",
+  "description": "Garantía actualizada a 13 meses",
+  "status": "ACTIVE"
+}
+
+### Eliminar una garantía físicamente (SIN token)
+DELETE {{baseUrl}}/api/warranties/public/7
+
+### Eliminar una garantía lógicamente (SIN token)
+DELETE {{baseUrl}}/api/warranties/public/7/logic
+
+
+### ================== RUTAS CON AUTENTICACIÓN ==================
+
+### Obtener todas las garantías (CON token)
+GET {{baseUrl}}/api/warranties
+Authorization: Bearer {{token}}
+
+### Obtener una garantía por ID (CON token)
+GET {{baseUrl}}/api/warranties/3
+Authorization: Bearer {{token}}
+
+### Crear una garantía (CON token)
+POST {{baseUrl}}/api/warranties
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "contract_id": 2,
+  "equipment_id": 5,
+  "issue_date": "2025-12-01T08:00:00.000Z",
+  "expiration_date": "2026-12-01T08:00:00.000Z",
+  "description": "Garantía premium de 1 año",
+  "status": "ACTIVE"
+}
+
+### Actualizar una garantía (CON token)
+PATCH {{baseUrl}}/api/warranties/3
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "contract_id": 2,
+  "equipment_id": 5,
+  "issue_date": "2025-12-02T10:00:00.000Z",
+  "expiration_date": "2026-12-02T10:00:00.000Z",
+  "description": "Garantía extendida",
+  "status": "ACTIVE"
+}
+
+### Eliminar una garantía físicamente (CON token)
+DELETE {{baseUrl}}/api/warranties/3
+Authorization: Bearer {{token}}
+
+### Eliminar una garantía lógicamente (CON token)
+DELETE {{baseUrl}}/api/warranties/3/logic
+Authorization: Bearer {{token}}

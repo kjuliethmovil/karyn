@@ -1,0 +1,83 @@
+import dotenv from "dotenv";
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYwNTY2Njk5LCJleHAiOjE3NjA1NjcyOTl9.lsTb2mzmVMq8VRbyDOzK4EeIpA13AB-mzDzgoEuNT5s
+@baseUrl = http://localhost:4000
+
+### ================== RUTAS SIN AUTENTICACIÓN ==================
+
+### Obtener todas las devoluciones (SIN token)
+GET {{baseUrl}}/api/returns/public
+
+### Obtener una devolución por ID (SIN token)
+GET {{baseUrl}}/api/returns/public/5
+
+### Crear una devolución (SIN token)
+POST {{baseUrl}}/api/returns/public
+Content-Type: application/json
+
+{
+  "contract_id": 1,
+  "return_date": "2025-11-20T10:00:00.000Z",
+  "damage_report": "Sin daños visibles",
+  "status": "ACTIVE"
+}
+
+### Actualizar una devolución (SIN token)
+PATCH {{baseUrl}}/api/returns/public/5
+Content-Type: application/json
+
+{
+  "contract_id": 1,
+  "return_date": "2025-11-21T15:30:00.000Z",
+  "damage_report": "Rayón leve en una pieza",
+  "status": "ACTIVE"
+}
+
+### Eliminar una devolución físicamente (SIN token)
+DELETE {{baseUrl}}/api/returns/public/5
+
+### Eliminar una devolución lógicamente (SIN token)
+DELETE {{baseUrl}}/api/returns/public/5/logic
+
+
+### ================== RUTAS CON AUTENTICACIÓN ==================
+
+### Obtener todas las devoluciones (CON token)
+GET {{baseUrl}}/api/returns
+Authorization: Bearer {{token}}
+
+### Obtener una devolución por ID (CON token)
+GET {{baseUrl}}/api/returns/2
+Authorization: Bearer {{token}}
+
+### Crear una devolución (CON token)
+POST {{baseUrl}}/api/returns
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "contract_id": 3,
+  "return_date": "2025-11-22T09:00:00.000Z",
+  "damage_report": "Golpe en la carcasa",
+  "status": "ACTIVE"
+}
+
+### Actualizar una devolución (CON token)
+PATCH {{baseUrl}}/api/returns/2
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "contract_id": 3,
+  "return_date": "2025-11-23T14:00:00.000Z",
+  "damage_report": "Se encontraron piezas sueltas",
+  "status": "ACTIVE"
+}
+
+### Eliminar una devolución físicamente (CON token)
+DELETE {{baseUrl}}/api/returns/2
+Authorization: Bearer {{token}}
+
+### Eliminar una devolución lógicamente (CON token)
+DELETE {{baseUrl}}/api/returns/2/logic
+Authorization: Bearer {{token}}

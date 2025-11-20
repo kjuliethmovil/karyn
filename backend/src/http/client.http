@@ -1,0 +1,91 @@
+import dotenv from "dotenv";
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNzYzNTg0NzYzLCJleHAiOjE3NjM1ODUzNjN9.wnG68bE_FolpBAh9ELH99T3wxTI7-_4eniVOtAGvja0
+@baseUrl = http://localhost:4000
+
+### ================== RUTAS SIN AUTENTICACIÓN ==================
+
+### Obtener todos los clientes (SIN token)
+GET {{baseUrl}}/api/clients/public
+
+### Obtener un cliente por ID (SIN token)
+GET {{baseUrl}}/api/clients/public/1
+
+### Crear un cliente (SIN token)
+POST {{baseUrl}}/api/clients/public
+Content-Type: application/json
+
+{
+  "name": "Juan Pérez",
+  "address": "Calle 10 #20-30",
+  "phone": "3001234567",
+  "email": "juan@example.com",
+  "password": "123456",
+  "status": "ACTIVE"
+}
+
+### Actualizar un cliente (SIN token)
+PATCH {{baseUrl}}/api/clients/public/1
+Content-Type: application/json
+
+{
+  "name": "Juan Pérez Actualizado",
+  "address": "Calle 10 #20-30",
+  "phone": "3009876543",
+  "email": "juan_updated@example.com",
+  "password": "123456",
+  "status": "ACTIVE"
+}
+
+### Eliminar un cliente físicamente (SIN token)
+DELETE {{baseUrl}}/api/clients/public/1
+
+### Eliminación lógica de un cliente (SIN token)
+DELETE {{baseUrl}}/api/clients/public/2/logic
+
+
+### ================== RUTAS CON AUTENTICACIÓN ==================
+
+### Obtener todos los clientes (CON token)
+GET {{baseUrl}}/api/clients
+Authorization: Bearer {{token}}
+
+### Obtener un cliente por ID (CON token)
+GET {{baseUrl}}/api/clients/1
+Authorization: Bearer {{token}}
+
+### Crear un cliente (CON token)
+POST {{baseUrl}}/api/clients
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Empresa XYZ",
+  "address": "Zona Industrial, Bodega 4",
+  "phone": "3105556677",
+  "email": "contacto@xyz.com",
+  "password": "abc123",
+  "status": "ACTIVE"
+}
+
+### Actualizar un cliente (CON token)
+PATCH {{baseUrl}}/api/clients/3
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Empresa XYZ Actualizada",
+  "address": "Zona Industrial, Bodega 5",
+  "phone": "3102223344",
+  "email": "updated@xyz.com",
+  "password": "abc123",
+  "status": "ACTIVE"
+}
+
+### Eliminar un cliente físicamente (CON token)
+DELETE {{baseUrl}}/api/clients/3
+Authorization: Bearer {{token}}
+
+### Eliminación lógica de un cliente (CON token)
+DELETE {{baseUrl}}/api/clients/4/logic
+Authorization: Bearer {{token}}

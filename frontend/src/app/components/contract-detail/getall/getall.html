@@ -1,0 +1,66 @@
+<!-- 
+  Archivo: getall.html
+  Autor: Karyn Movil Estacio
+  Fecha: 2025-10-02
+  Descripción: Vista para listar detalles de contrato en tabla responsiva con PrimeNG y TailwindCSS,
+  con opciones para crear y editar detalles. Ajustada para que no se desborde.
+-->
+
+<div class="p-6">
+  <!-- Botón para crear un nuevo detalle de contrato -->
+  <div class="flex justify-end mb-4">
+    <button
+      pButton
+      type="button"
+      class="p-button p-component bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+      icon="pi pi-plus"
+      label="Nuevo Detalle"
+      [routerLink]="['/detalles-contrato/nuevo']"
+    >
+    </button>
+  </div>
+
+  <!-- Tabla -->
+  <div class="overflow-x-auto rounded-lg shadow-md max-w-full">
+    <p-table
+      [value]="contractDetails"
+      stripedRows
+      responsiveLayout="scroll"
+      class="w-full table-fixed"
+    >
+      <ng-template pTemplate="header">
+        <tr class="bg-gray-100 text-gray-700 text-sm uppercase tracking-wide">
+          <th class="p-3 text-left w-20">Id</th>
+          <th class="p-3 text-left w-1/6">Contrato</th>
+          <th class="p-3 text-left w-1/6">Equipo</th>
+          <th class="p-3 text-left w-20">Cantidad</th>
+          <th class="p-3 text-left w-1/6">Tarifa Diaria</th>
+          <th class="p-3 text-left w-20">Días</th>
+          <th class="p-3 text-left w-1/6">Subtotal</th>
+          <th class="p-3 text-center w-20">Acciones</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-detail>
+        <tr class="border-b hover:bg-gray-50">
+          <td class="p-3">{{ detail.contract_detail_id }}</td>
+          <td class="p-3">{{ detail.contract_id }}</td>
+          <td class="p-3">{{ detail.equipment_id }}</td>
+          <td class="p-3">{{ detail.quantity }}</td>
+          <td class="p-3 whitespace-nowrap">{{ detail.daily_rate | currency }}</td>
+          <td class="p-3">{{ detail.days }}</td>
+          <td class="p-3 whitespace-nowrap">{{ detail.subtotal | currency }}</td>
+          <td class="p-3 text-center">
+            <!-- Botón editar -->
+            <a
+              [routerLink]="['/detalles-contrato/editar', detail.contract_detail_id]"
+              class="text-blue-600 hover:text-blue-800"
+            >
+              <i class="pi pi-pencil"></i>
+            </a>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

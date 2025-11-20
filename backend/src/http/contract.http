@@ -1,0 +1,91 @@
+import dotenv from "dotenv";
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYwNTY2Njk5LCJleHAiOjE3NjA1NjcyOTl9.lsTb2mzmVMq8VRbyDOzK4EeIpA13AB-mzDzgoEuNT5s
+@baseUrl = http://localhost:4000
+
+### ================== RUTAS SIN AUTENTICACIÓN ==================
+
+### Obtener todos los contratos (SIN token)
+GET {{baseUrl}}/api/contracts/public
+
+### Obtener un contrato por ID (SIN token)
+GET {{baseUrl}}/api/contracts/public/1
+
+### Crear un contrato (SIN token)
+POST {{baseUrl}}/api/contracts/public
+Content-Type: application/json
+
+{
+  "start_date": "2025-11-01T00:00:00.000Z",
+  "end_date": "2025-11-10T00:00:00.000Z",
+  "total_days": 9,
+  "total_amount": 350000,
+  "client_id": 1,
+  "status": "ACTIVE"
+}
+
+### Actualizar un contrato (SIN token)
+PATCH {{baseUrl}}/api/contracts/public/1
+Content-Type: application/json
+
+{
+  "start_date": "2025-11-02T00:00:00.000Z",
+  "end_date": "2025-11-12T00:00:00.000Z",
+  "total_days": 10,
+  "total_amount": 380000,
+  "client_id": 1,
+  "status": "ACTIVE"
+}
+
+### Eliminar un contrato físicamente (SIN token)
+DELETE {{baseUrl}}/api/contracts/public/1
+
+### Eliminación lógica de un contrato (SIN token)
+DELETE {{baseUrl}}/api/contracts/public/2/logic
+
+
+### ================== RUTAS CON AUTENTICACIÓN ==================
+
+### Obtener todos los contratos (CON token)
+GET {{baseUrl}}/api/contracts
+Authorization: Bearer {{token}}
+
+### Obtener un contrato por ID (CON token)
+GET {{baseUrl}}/api/contracts/1
+Authorization: Bearer {{token}}
+
+### Crear un contrato (CON token)
+POST {{baseUrl}}/api/contracts
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "start_date": "2026-01-05T00:00:00.000Z",
+  "end_date": "2026-01-20T00:00:00.000Z",
+  "total_days": 15,
+  "total_amount": 780000,
+  "client_id": 3,
+  "status": "ACTIVE"
+}
+
+### Actualizar un contrato (CON token)
+PATCH {{baseUrl}}/api/contracts/3
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "start_date": "2026-01-06T00:00:00.000Z",
+  "end_date": "2026-01-22T00:00:00.000Z",
+  "total_days": 16,
+  "total_amount": 800000,
+  "client_id": 3,
+  "status": "ACTIVE"
+}
+
+### Eliminar un contrato físicamente (CON token)
+DELETE {{baseUrl}}/api/contracts/3
+Authorization: Bearer {{token}}
+
+### Eliminación lógica de un contrato (CON token)
+DELETE {{baseUrl}}/api/contracts/4/logic
+Authorization: Bearer {{token}}

@@ -1,0 +1,95 @@
+import dotenv from "dotenv";
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYwNTY2Njk5LCJleHAiOjE3NjA1NjcyOTl9.lsTb2mzmVMq8VRbyDOzK4EeIpA13AB-mzDzgoEuNT5s
+@baseUrl = http://localhost:4000
+
+### ================== RUTAS SIN AUTENTICACIÓN ==================
+
+### Obtener todos los equipos (SIN token)
+GET {{baseUrl}}/api/equipments/public
+
+### Obtener un equipo por ID (SIN token)
+GET {{baseUrl}}/api/equipments/public/1
+
+### Crear un equipo (SIN token)
+POST {{baseUrl}}/api/equipment/public
+Content-Type: application/json
+
+{
+  "name": "Taladro Industrial",
+  "brand": "Bosch",
+  "price": 150000,
+  "stock": 10,
+  "category_id": 2,
+  "provider_id": 1,
+  "status": "ACTIVE"
+}
+
+### Actualizar un equipo (SIN token)
+PATCH {{baseUrl}}/api/equipment/public/1
+Content-Type: application/json
+
+{
+  "name": "Taladro Industrial Pro",
+  "brand": "Bosch",
+  "price": 180000,
+  "stock": 12,
+  "category_id": 2,
+  "provider_id": 1,
+  "status": "ACTIVE"
+}
+
+### Eliminar un equipo físicamente (SIN token)
+DELETE {{baseUrl}}/api/equipment/public/1
+
+### Eliminación lógica de un equipo (SIN token)
+DELETE {{baseUrl}}/api/equipment/public/2/logic
+
+
+### ================== RUTAS CON AUTENTICACIÓN ==================
+
+### Obtener todos los equipos (CON token)
+GET {{baseUrl}}/api/equipment
+Authorization: Bearer {{token}}
+
+### Obtener un equipo por ID (CON token)
+GET {{baseUrl}}/api/equipment/1
+Authorization: Bearer {{token}}
+
+### Crear un equipo (CON token)
+POST {{baseUrl}}/api/equipment
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Compresor de Aire",
+  "brand": "Makita",
+  "price": 600000,
+  "stock": 5,
+  "category_id": 3,
+  "provider_id": 2,
+  "status": "ACTIVE"
+}
+
+### Actualizar un equipo (CON token)
+PATCH {{baseUrl}}/api/equipment/3
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Compresor de Aire Pro",
+  "brand": "Makita",
+  "price": 650000,
+  "stock": 6,
+  "category_id": 3,
+  "provider_id": 2,
+  "status": "ACTIVE"
+}
+
+### Eliminar un equipo físicamente (CON token)
+DELETE {{baseUrl}}/api/equipment/3
+Authorization: Bearer {{token}}
+
+### Eliminación lógica de un equipo (CON token)
+DELETE {{baseUrl}}/api/equipment/4/logic
+Authorization: Bearer {{token}}

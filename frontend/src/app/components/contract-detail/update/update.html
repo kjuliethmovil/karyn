@@ -1,0 +1,43 @@
+<!-- 
+  Archivo: update.html
+  Autor: Karyn Movil Estacio
+  Fecha: 2025-10-02
+  Descripción: Formulario para actualizar un detalle de contrato con Reactive Forms y TailwindCSS.
+-->
+
+<div class="flex items-center justify-center min-h-screen bg-gray-50 p-6">
+  <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
+    <h2 class="text-2xl font-bold mb-6 text-gray-700">Editar Detalle de Contrato</h2>
+
+    <form [formGroup]="detailForm" (ngSubmit)="onSubmit()" class="space-y-4">
+      <div>
+        <label class="block text-sm font-medium text-gray-600">ID Contrato</label>
+        <input pInputText formControlName="contract_id" type="number" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">ID Equipo</label>
+        <input pInputText formControlName="equipment_id" type="number" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Cantidad</label>
+        <input pInputText formControlName="quantity" type="number" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Tarifa Diaria</label>
+        <input pInputText formControlName="daily_rate" type="number" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Días</label>
+        <input pInputText formControlName="days" type="number" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Subtotal</label>
+        <input pInputText formControlName="subtotal" type="number" class="w-full mt-1 p-2 border rounded-md"/>
+      </div>
+
+      <div class="flex justify-end mt-6">
+        <button pButton type="submit" [disabled]="detailForm.invalid" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md" label="Actualizar" icon="pi pi-save"></button>
+      </div>
+    </form>
+  </div>
+</div>

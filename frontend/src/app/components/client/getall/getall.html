@@ -1,0 +1,106 @@
+<!-- 
+  Archivo: getall.html
+  Autor: Karyn Movil Estacio
+  Fecha: 2025-10-02
+  Descripción: Vista para gestionar clientes con PrimeNG y TailwindCSS,
+  usando paginación, estados y acciones (editar / eliminar).
+-->
+
+<div class="card p-6 md:p-8">
+  <!-- Título y botón para crear un nuevo cliente -->
+  <div class="flex justify-between items-center mb-4">
+    <h2 class="text-2xl font-bold">Gestión de Clientes</h2>
+
+    <button
+      pButton
+      type="button"
+      class="p-button p-component bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+      icon="pi pi-plus"
+      label="Nuevo Cliente"
+      [routerLink]="['/clientes/nuevo']"
+    >
+    </button>
+  </div>
+
+  <!-- Tabla responsiva con paginación -->
+  <div class="overflow-x-auto rounded-lg shadow-md max-w-full">
+    <p-table
+      [value]="clients"
+      [loading]="loading"
+      stripedRows
+      responsiveLayout="scroll"
+      class="w-full table-fixed"
+      [tableStyle]="{'min-width': '60rem'}"
+      [paginator]="true"
+      [rows]="10"
+      [rowsPerPageOptions]="[5,10,20]"
+      [showCurrentPageReport]="true"
+      currentPageReportTemplate="Mostrando {first} a {last} de {totalRecords} registros"
+    >
+      <!-- Encabezado de tabla -->
+      <ng-template pTemplate="header">
+        <tr class="bg-gray-100 text-gray-700 text-sm uppercase tracking-wide">
+          <th class="p-3 text-left w-20">Id</th>
+          <th class="p-3 text-left w-1/6">Nombre</th>
+          
+          <th class="p-3 text-left w-1/4">Email</th>
+          <th class="p-3 text-left w-1/6">Teléfono</th>
+          <th class="p-3 text-left w-1/4">Dirección</th>
+          <th class="p-3 text-left w-24">Estado</th>
+          <th class="p-3 text-center w-32">Acciones</th>
+        </tr>
+      </ng-template>
+
+      <!-- Cuerpo de tabla -->
+      <ng-template pTemplate="body" let-client>
+        <tr class="border-b hover:bg-gray-50">
+          <td class="p-3">{{ client.id }}</td>
+          <td class="p-3">{{ client.name }}</td>
+          
+          <td class="p-3 truncate">{{ client.email }}</td>
+          <td class="p-3 whitespace-nowrap">{{ client.phone }}</td>
+          <td class="p-3 truncate">{{ client.address }}</td>
+
+          <!-- Badge de estado -->
+          <td class="p-3">
+            <span
+              class="px-2 py-1 rounded text-xs font-semibold"
+              [ngClass]="client.status === 'ACTIVE' ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
+            >
+              {{ client.status || 'SIN ESTADO' }}
+            </span>
+          </td>
+
+          <!-- Acciones -->
+          <td class="p-3 text-center">
+            <div class="flex justify-center gap-2">
+              <!-- Botón editar -->
+              <button
+                pButton
+                type="button"
+                icon="pi pi-pencil"
+                class="p-button-rounded p-button-text p-button-warning"
+                [routerLink]="['/clientes/editar', client.id]"
+                pTooltip="Editar"
+              ></button>
+
+              <!-- Botón eliminar -->
+              <button
+                pButton
+                type="button"
+                icon="pi pi-trash"
+                class="p-button-rounded p-button-text p-button-danger"
+                (click)="deleteClient(client)"
+                pTooltip="Eliminar"
+              ></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>
+
+<!-- Componentes globales de PrimeNG -->
+<p-confirmDialog></p-confirmDialog>
+<p-toast></p-toast>

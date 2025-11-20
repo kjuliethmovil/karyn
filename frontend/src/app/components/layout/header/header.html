@@ -1,0 +1,41 @@
+<!-- CONTENEDOR PRINCIPAL DEL HEADER -->
+<header class="w-full bg-white shadow-md px-6 py-4 flex items-center justify-between">
+
+    <!-- LOGO A LA IZQUIERDA -->
+    <div class="flex items-center gap-3">
+        <button routerLink="/home" class="cursor-pointer">
+            <img src="/logo1.png" alt="Rentool Logo" class="w-15 h-15 object-contain" />
+        </button>
+    </div>
+
+    <!-- NOMBRE CENTRADO -->
+    <div class="flex-1 text-center">
+        <h1 class="text-2xl font-bold text-gray-800 tracking-wide">
+            RENTOOL
+        </h1>
+    </div>
+
+    <!-- BOTONES A LA DERECHA -->
+    <div class="flex items-center gap-2">
+
+        <!-- NOTIFICACIONES -->
+        <button type="button"
+            class="text-orange-500 bg-gray-100 hover:bg-gray-200 rounded shadow hover:shadow-lg flex items-center justify-center w-10 h-10">
+            <p-overlaybadge value="2">
+                <i class="pi pi-bell text-2xl"></i>
+            </p-overlaybadge>
+        </button>
+
+        <!-- MENÚ DE USUARIO -->
+        <button type="button"
+            class="text-orange-500 bg-gray-100 hover:bg-gray-200 rounded shadow hover:shadow-lg w-10 h-10 flex items-center justify-center"
+            (click)="menu.toggle($event)">
+            <i class="pi pi-users text-xl"></i>
+        </button>
+
+    </div>
+
+</header>
+
+<!-- MENÚ DESPLEGABLE -->
+<p-tieredmenu #menu [model]="items" [popup]="true"></p-tieredmenu>

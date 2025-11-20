@@ -1,0 +1,112 @@
+<!-- 
+  Archivo: create.html
+  Autor: Karyn Movil Estacio
+  Fecha: 2025-10-02
+  Descripción: Formulario para crear un equipo con Reactive Forms y TailwindCSS.
+-->
+
+<div class="flex items-center justify-center min-h-screen bg-gray-50 p-6">
+  <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
+    <h2 class="text-2xl font-bold mb-6 text-gray-700">Registrar Equipo</h2>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+      
+      <!-- Nombre -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Nombre</label>
+        <input
+          pInputText
+          formControlName="name"
+          type="text"
+          placeholder="Ingrese el nombre del equipo"
+          class="w-full mt-1 p-2 border rounded-md"
+        />
+      </div>
+
+      <!-- Marca -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Marca</label>
+        <input
+          pInputText
+          formControlName="brand"
+          type="text"
+          placeholder="Ingrese la marca"
+          class="w-full mt-1 p-2 border rounded-md"
+        />
+      </div>
+
+      <!-- Precio -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Precio</label>
+        <input
+          pInputText
+          formControlName="price"
+          type="number"
+          placeholder="Ingrese el precio"
+          class="w-full mt-1 p-2 border rounded-md"
+        />
+      </div>
+
+      <!-- Stock -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Stock</label>
+        <input
+          pInputText
+          formControlName="stock"
+          type="number"
+          placeholder="Ingrese la cantidad en stock"
+          class="w-full mt-1 p-2 border rounded-md"
+        />
+      </div>
+
+      <!-- Categoría -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Categoría</label>
+        <select
+          formControlName="category_id"
+          class="w-full mt-1 p-2 border rounded-md"
+        >
+          <option value="" disabled selected>Seleccione categoría</option>
+          <option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</option>
+        </select>
+      </div>
+
+      <!-- Proveedor -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Proveedor</label>
+        <select
+          formControlName="provider_id"
+          class="w-full mt-1 p-2 border rounded-md"
+        >
+          <option value="" disabled selected>Seleccione proveedor</option>
+          <option *ngFor="let p of providers" [value]="p.id">{{ p.name }}</option>
+        </select>
+      </div>
+
+      <!-- Estado -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Estado</label>
+        <select
+          formControlName="status"
+          class="w-full mt-1 p-2 border rounded-md"
+        >
+          <option *ngFor="let option of statusOptions" [value]="option">{{ option }}</option>
+        </select>
+      </div>
+
+      <!-- Botón Guardar -->
+      <div class="flex justify-end mt-6">
+        <button
+          pButton
+          type="submit"
+          [disabled]="form.invalid"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+          label="Guardar"
+          icon="pi pi-check"
+        >
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

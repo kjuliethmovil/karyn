@@ -1,0 +1,104 @@
+<div class="flex items-center justify-center min-h-screen bg-gray-50 p-6">
+  <div class="bg-white shadow-lg rounded-lg p-8 w-full max-w-md">
+    <!-- Título -->
+    <h2 class="text-2xl font-bold mb-6 text-gray-700">Registrar Proveedor</h2>
+
+    <!-- Formulario -->
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+
+      <!-- Nombre -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Nombre</label>
+        <input
+          pInputText
+          formControlName="name"
+          type="text"
+          placeholder="Ingrese el nombre del proveedor"
+          class="w-full mt-1 p-2 border rounded-md"
+        />
+      </div>
+
+      <!-- Persona de contacto -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Persona de contacto</label>
+        <input
+          pInputText
+          formControlName="contact_person"
+          type="text"
+          placeholder="Ingrese la persona de contacto"
+          class="w-full mt-1 p-2 border rounded-md"
+        />
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Email</label>
+        <input
+          pInputText
+          formControlName="email"
+          type="email"
+          placeholder="ejemplo@correo.com"
+          class="w-full mt-1 p-2 border rounded-md"
+        />
+      </div>
+
+      <!-- Teléfono -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Teléfono</label>
+        <input
+          pInputText
+          formControlName="phone"
+          type="text"
+          placeholder="Ingrese el teléfono"
+          class="w-full mt-1 p-2 border rounded-md"
+        />
+      </div>
+
+      <!-- Dirección -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Dirección</label>
+        <input
+          pInputText
+          formControlName="address"
+          type="text"
+          placeholder="Ingrese la dirección"
+          class="w-full mt-1 p-2 border rounded-md"
+        />
+      </div>
+
+      <!-- Estado -->
+      <div>
+        <label class="block text-sm font-medium text-gray-600">Estado</label>
+        <select
+          formControlName="status"
+          class="w-full mt-1 p-2 border rounded-md"
+        >
+          <option value="ACTIVE">ACTIVE</option>
+          <option value="INACTIVE">INACTIVE</option>
+        </select>
+      </div>
+
+      <!-- Botones -->
+      <div class="flex justify-end mt-6 gap-2">
+        <button
+          pButton
+          type="submit"
+          [disabled]="form.invalid"
+          class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+          label="Guardar"
+          icon="pi pi-check"
+        >
+        </button>
+        <button
+          pButton
+          type="button"
+          class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-md"
+          (click)="cancelar()"
+          label="Cancelar"
+          icon="pi pi-times"
+        >
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

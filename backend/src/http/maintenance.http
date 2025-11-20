@@ -1,0 +1,87 @@
+import dotenv from "dotenv";
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYwNTY2Njk5LCJleHAiOjE3NjA1NjcyOTl9.lsTb2mzmVMq8VRbyDOzK4EeIpA13AB-mzDzgoEuNT5s
+@baseUrl = http://localhost:4000
+
+### ================== RUTAS SIN AUTENTICACIÓN ==================
+
+### Obtener todos los mantenimientos (SIN token)
+GET {{baseUrl}}/api/maintenances/public
+
+### Obtener un mantenimiento por ID (SIN token)
+GET {{baseUrl}}/api/maintenance/public/5
+
+### Crear un mantenimiento (SIN token)
+POST {{baseUrl}}/api/maintenance/public
+Content-Type: application/json
+
+{
+  "equipment_id": 3,
+  "date": "2025-11-20T15:00:00.000Z",
+  "description": "Cambio de aceite y ajuste general",
+  "cost": 150000,
+  "status": "PENDING"
+}
+
+### Actualizar un mantenimiento (SIN token)
+PATCH {{baseUrl}}/api/maintenance/public/5
+Content-Type: application/json
+
+{
+  "equipment_id": 3,
+  "date": "2025-11-22T10:00:00.000Z",
+  "description": "Revisión completa del motor",
+  "cost": 180000,
+  "status": "IN_PROGRESS"
+}
+
+### Eliminar un mantenimiento (FÍSICO, SIN token)
+DELETE {{baseUrl}}/api/maintenance/public/5
+
+### Eliminar un mantenimiento lógicamente (SIN token)
+DELETE {{baseUrl}}/api/maintenance/public/5/logic
+
+
+### ================== RUTAS CON AUTENTICACIÓN ==================
+
+### Obtener todos los mantenimientos (CON token)
+GET {{baseUrl}}/api/maintenance
+Authorization: Bearer {{token}}
+
+### Obtener un mantenimiento por ID (CON token)
+GET {{baseUrl}}/api/maintenance/2
+Authorization: Bearer {{token}}
+
+### Crear un mantenimiento (CON token)
+POST {{baseUrl}}/api/maintenance
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "equipment_id": 4,
+  "date": "2025-11-25T09:00:00.000Z",
+  "description": "Sustitución de piezas desgastadas",
+  "cost": 220000,
+  "status": "PENDING"
+}
+
+### Actualizar un mantenimiento (CON token)
+PATCH {{baseUrl}}/api/maintenance/2
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "equipment_id": 4,
+  "date": "2025-11-26T09:00:00.000Z",
+  "description": "Mantenimiento finalizado con pruebas",
+  "cost": 250000,
+  "status": "COMPLETED"
+}
+
+### Eliminar un mantenimiento (FÍSICO, CON token)
+DELETE {{baseUrl}}/api/maintenance/2
+Authorization: Bearer {{token}}
+
+### Eliminar un mantenimiento lógicamente (CON token)
+DELETE {{baseUrl}}/api/maintenance/2/logic
+Authorization: Bearer {{token}}

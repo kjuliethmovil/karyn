@@ -1,0 +1,79 @@
+import dotenv from "dotenv";
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYwNTY2Njk5LCJleHAiOjE3NjA1NjcyOTl9.lsTb2mzmVMq8VRbyDOzK4EeIpA13AB-mzDzgoEuNT5s
+@baseUrl = http://localhost:4000
+
+### ================== RUTAS SIN AUTENTICACIÓN ==================
+
+### Obtener todas las categorías (SIN token)
+GET {{baseUrl}}/api/categories/public
+
+### Obtener una categoría por ID (SIN token)
+GET {{baseUrl}}/api/categories/public/1
+
+### Crear una categoría (SIN token)
+POST {{baseUrl}}/api/categories/public
+Content-Type: application/json
+
+{
+  "name": "Herramientas eléctricas",
+  "description": "Categoría de herramientas que requieren energía eléctrica",
+  "status": "ACTIVE"
+}
+
+### Actualizar una categoría (SIN token)
+PATCH {{baseUrl}}/api/categories/public/1
+Content-Type: application/json
+
+{
+  "name": "Herramientas Eléctricas Actualizadas",
+  "description": "Actualización de categoría",
+  "status": "ACTIVE"
+}
+
+### Eliminar una categoría físicamente (SIN token)
+DELETE {{baseUrl}}/api/categories/public/1
+
+### Eliminación lógica de una categoría (SIN token)
+DELETE {{baseUrl}}/api/categories/public/2/logic
+
+
+### ================== RUTAS CON AUTENTICACIÓN ==================
+
+### Obtener todas las categorías (CON token)
+GET {{baseUrl}}/api/categories
+Authorization: Bearer {{token}}
+
+### Obtener una categoría por ID (CON token)
+GET {{baseUrl}}/api/categories/1
+Authorization: Bearer {{token}}
+
+### Crear una categoría (CON token)
+POST {{baseUrl}}/api/categories
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Maquinaria pesada",
+  "description": "Equipo industrial y maquinaria de alto rendimiento",
+  "status": "ACTIVE"
+}
+
+### Actualizar una categoría (CON token)
+PATCH {{baseUrl}}/api/categories/3
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "name": "Maquinaria pesada actualizada",
+  "description": "Actualización de categoría",
+  "status": "ACTIVE"
+}
+
+### Eliminar una categoría físicamente (CON token)
+DELETE {{baseUrl}}/api/categories/3
+Authorization: Bearer {{token}}
+
+### Eliminación lógica de una categoría (CON token)
+DELETE {{baseUrl}}/api/categories/4/logic
+Authorization: Bearer {{token}}

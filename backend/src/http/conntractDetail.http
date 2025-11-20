@@ -1,0 +1,87 @@
+import dotenv from "dotenv";
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYwNTY2Njk5LCJleHAiOjE3NjA1NjcyOTl9.lsTb2mzmVMq8VRbyDOzK4EeIpA13AB-mzDzgoEuNT5s
+@baseUrl = http://localhost:4000
+
+### ================== RUTAS SIN AUTENTICACIÓN ==================
+
+### Obtener todos los detalles de contrato (SIN token)
+GET {{baseUrl}}/api/contract-details/public
+
+### Obtener un detalle de contrato por ID (SIN token)
+GET {{baseUrl}}/api/contract-details/public/1
+
+### Crear un detalle de contrato (SIN token)
+POST {{baseUrl}}/api/contract-details/public
+Content-Type: application/json
+
+{
+  "contract_id": 1,
+  "equipment_id": 5,
+  "days": 7,
+  "rate": 45000,
+  "status": "ACTIVE"
+}
+
+### Actualizar un detalle de contrato (SIN token)
+PATCH {{baseUrl}}/api/contract-details/public/1
+Content-Type: application/json
+
+{
+  "contract_id": 1,
+  "equipment_id": 5,
+  "days": 10,
+  "rate": 45000,
+  "status": "ACTIVE"
+}
+
+### Eliminar un detalle de contrato físicamente (SIN token)
+DELETE {{baseUrl}}/api/contract-details/public/1
+
+### Eliminación lógica de detalle de contrato (SIN token)
+DELETE {{baseUrl}}/api/contract-details/public/2/logic
+
+
+### ================== RUTAS CON AUTENTICACIÓN ==================
+
+### Obtener todos los detalles de contrato (CON token)
+GET {{baseUrl}}/api/contractDetails
+Authorization: Bearer {{token}}
+
+### Obtener un detalle de contrato por ID (CON token)
+GET {{baseUrl}}/api/contractDetails/1
+Authorization: Bearer {{token}}
+
+### Crear un detalle de contrato (CON token)
+POST {{baseUrl}}/api/contractDetails
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "contract_id": 3,
+  "equipment_id": 8,
+  "days": 12,
+  "rate": 60000,
+  "status": "ACTIVE"
+}
+
+### Actualizar un detalle de contrato (CON token)
+PATCH {{baseUrl}}/api/contractDetails/3
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "contract_id": 3,
+  "equipment_id": 8,
+  "days": 15,
+  "rate": 60000,
+  "status": "ACTIVE"
+}
+
+### Eliminar un detalle de contrato físicamente (CON token)
+DELETE {{baseUrl}}/api/contractDetails/3
+Authorization: Bearer {{token}}
+
+### Eliminación lógica de un detalle de contrato (CON token)
+DELETE {{baseUrl}}/api/contractDetails/4/logic
+Authorization: Bearer {{token}}

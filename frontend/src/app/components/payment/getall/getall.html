@@ -1,0 +1,66 @@
+<!-- 
+  Archivo: getall.html
+  Autor: Karyn Movil Estacio
+  Fecha: 2025-10-02
+  Descripción: Vista para listar pagos (Payment) en una tabla responsiva con PrimeNG y TailwindCSS,
+  con opciones para crear y editar pagos. Ajustada para que no se desborde.
+-->
+
+<div class="p-6">
+  <!-- Botón para crear un nuevo pago -->
+  <div class="flex justify-end mb-4">
+    <button
+      pButton
+      type="button"
+      class="p-button p-component bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md"
+      icon="pi pi-plus"
+      label="Nuevo Pago"
+      [routerLink]="['/pagos/nuevo']"
+    >
+    </button>
+  </div>
+
+  <!-- Tabla responsiva -->
+  <div class="overflow-x-auto rounded-lg shadow-md max-w-full">
+    <p-table
+      [value]="payments"
+      stripedRows
+      responsiveLayout="scroll"
+      class="w-full table-fixed"
+    >
+      <ng-template pTemplate="header">
+        <tr class="bg-gray-100 text-gray-700 text-sm uppercase tracking-wide">
+          <th class="p-3 text-left w-20">Id</th>
+          <th class="p-3 text-left w-1/6">Contrato</th>
+          <th class="p-3 text-left w-1/6">Fecha Pago</th>
+          <th class="p-3 text-left w-1/6">Monto</th>
+          <th class="p-3 text-left w-1/6">Método</th>
+          <th class="p-3 text-left w-1/6">Estado</th>
+          <th class="p-3 text-left w-1/4">Referencia</th>
+          <th class="p-3 text-center w-20">Acciones</th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-payment>
+        <tr class="border-b hover:bg-gray-50">
+          <td class="p-3">{{ payment.payment_id }}</td>
+          <td class="p-3">{{ payment.contract_id }}</td>
+          <td class="p-3">{{ payment.payment_date | date }}</td>
+          <td class="p-3">{{ payment.amount | currency }}</td>
+          <td class="p-3">{{ payment.method }}</td>
+          <td class="p-3">{{ payment.status }}</td>
+          <td class="p-3">{{ payment.reference }}</td>
+          <td class="p-3 text-center">
+            <!-- Botón editar -->
+            <a
+              [routerLink]="['/pagos/editar', payment.payment_id]"
+              class="text-blue-600 hover:text-blue-800"
+            >
+              <i class="pi pi-pencil"></i>
+            </a>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</div>

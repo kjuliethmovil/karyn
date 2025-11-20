@@ -1,0 +1,79 @@
+import dotenv from "dotenv";
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNzYwNTY2Njk5LCJleHAiOjE3NjA1NjcyOTl9.lsTb2mzmVMq8VRbyDOzK4EeIpA13AB-mzDzgoEuNT5s
+@baseUrl = http://localhost:4000
+
+### ================== RUTAS SIN AUTENTICACIÓN ==================
+
+### Obtener todas las entregas (SIN token)
+GET {{baseUrl}}/api/deliveries/public
+
+### Obtener una entrega por ID (SIN token)
+GET {{baseUrl}}/api/deliveries/public/1
+
+### Crear una entrega (SIN token)
+POST {{baseUrl}}/api/deliveries/public
+Content-Type: application/json
+
+{
+  "contract_id": 1,
+  "delivery_date": "2025-11-04",
+  "status": "PENDING"
+}
+
+### Actualizar una entrega (SIN token)
+PATCH {{baseUrl}}/api/deliveries/public/1
+Content-Type: application/json
+
+{
+  "contract_id": 1,
+  "delivery_date": "2025-11-05T00:00:00.000Z",
+  "status": "COMPLETED"
+}
+
+### Eliminar una entrega físicamente (SIN token)
+DELETE {{baseUrl}}/api/deliveries/public/1
+
+### Eliminación lógica de una entrega (SIN token)
+DELETE {{baseUrl}}/api/deliveries/public/2/logic
+
+
+### ================== RUTAS CON AUTENTICACIÓN ==================
+
+### Obtener todas las entregas (CON token)
+GET {{baseUrl}}/api/deliveries
+Authorization: Bearer {{token}}
+
+### Obtener una entrega por ID (CON token)
+GET {{baseUrl}}/api/deliveries/1
+Authorization: Bearer {{token}}
+
+### Crear una entrega (CON token)
+POST {{baseUrl}}/api/deliveries
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "contract_id": 3,
+  "delivery_date": "2026-02-10T00:00:00.000Z",
+  "status": "PENDING"
+}
+
+### Actualizar una entrega (CON token)
+PATCH {{baseUrl}}/api/deliveries/3
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "contract_id": 3,
+  "delivery_date": "2026-02-12T00:00:00.000Z",
+  "status": "COMPLETED"
+}
+
+### Eliminar una entrega físicamente (CON token)
+DELETE {{baseUrl}}/api/deliveries/3
+Authorization: Bearer {{token}}
+
+### Eliminación lógica de una entrega (CON token)
+DELETE {{baseUrl}}/api/deliveries/4/logic
+Authorization: Bearer {{token}}
